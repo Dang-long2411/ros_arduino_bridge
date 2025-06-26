@@ -86,6 +86,35 @@
     setMotorSpeed(LEFT, leftSpeed);
     setMotorSpeed(RIGHT, rightSpeed);
   }
+
+#elif defined BLD300B_MOTOR_DRIVER
+   void initMotorController() {
+      pinMode(LEFT_DIR_PIN, OUTPUT);
+      pinMode(RIGHT_DIR_PIN, OUTPUT);
+      pinMode(LEFT_PWM_PIN, OUTPUT);
+      pinMode(RIGHT_PWM_PIN, OUTPUT);
+      pinMode(MOTOR_ENABLE_PIN, OUTPUT);
+      digitalWrite(MOTOR_ENABLE_PIN, HIGH);
+   }
+
+   void setMotorSpeed(int i, int spd) {
+      bool reverse = false;
+      if (spd < 0) { spd = -spd; reverse = true; }
+      if (spd > 255) spd = 255;
+
+      if (i == LEFT) {
+         digitalWrite(LEFT_DIR_PIN, reverse);
+         analogWrite(LEFT_PWM_PIN, spd);
+     } else {
+         digitalWrite(RIGHT_DIR_PIN, reverse);
+         analogWrite(RIGHT_PWM_PIN, spd);
+     }
+   }
+
+   void setMotorSpeeds(int leftSpeed, int rightSpeed) {
+      setMotorSpeed(LEFT, leftSpeed);
+      setMotorSpeed(RIGHT, rightSpeed);
+   }
 #else
   #error A motor driver must be selected!
 #endif
