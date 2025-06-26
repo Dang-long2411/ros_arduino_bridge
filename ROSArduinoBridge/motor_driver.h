@@ -9,7 +9,7 @@
   #define RIGHT_PWM_PIN   10
   #define MOTOR_ENABLE_PIN 4
 
-#elif define L298_MOTOR_DRIVER
+#elif defined L298_MOTOR_DRIVER
   #define RIGHT_MOTOR_BACKWARD 5
   #define LEFT_MOTOR_BACKWARD  6
   #define RIGHT_MOTOR_FORWARD  9
